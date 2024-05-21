@@ -12,7 +12,7 @@ const App = ({ keycloak }) => {
       try {
         const response = await axios.get('http://localhost:5294/test', {
           headers: {
-            Authorization: `bearer ${keycloak.token}`
+            Authorization: `Bearer ${keycloak.token}`
           }
         });
         setMessage(response.data.message);
@@ -22,16 +22,21 @@ const App = ({ keycloak }) => {
         console.error('Error fetching message:', error);
       }
     };
-
+console.log('success' ,{message});
     fetchMessage();
   }, [keycloak]);
 
   return (
-      <div className="App">
-        <header className="App-header">
-          <p>{message}</p>
-        </header>
-      </div>
+      // <div className="App">
+      //   <header className="App-header">
+      //     <p>{message}</p>
+      //   </header>
+      // </div>
+      <>
+        <h1>
+          this is KEYCLoak {message}
+        </h1>
+      </>
   );
 };
 
