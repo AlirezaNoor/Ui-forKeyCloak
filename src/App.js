@@ -3,40 +3,41 @@ import axios from 'axios';
 import './App.css';
 
 const App = ({ keycloak }) => {
-  const [message, setMessage] = useState('');
+  const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    console.log({keycloak});
-
-    const fetchMessage = async () => {
+    const fetchUserInfo = async () => {
       try {
-        const response = await axios.get('http://localhost:5294/test', {
+        const response = await axios.get('http://localhost:5294/userinfo', {
           headers: {
             Authorization: `Bearer ${keycloak.token}`
           }
         });
-        setMessage(response.data.message);
-        console.log('success:', response.data.message);
-
+        setUserInfo(response.data);
+        console.log(`Bearer ${keycloak.token}`)
+        console.log(`Data`, userInfo)
       } catch (error) {
-        console.error('Error fetching message:', error);
+        console.error('Error fetching user info:', error);
       }
     };
-console.log('success' ,{message});
-    fetchMessage();
+
+    if (keycloak && keycloak.token) {
+      fetchUserInfo();
+    }
   }, [keycloak]);
 
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
+
   return (
-      // <div className="App">
-      //   <header className="App-header">
-      //     <p>{message}</p>
-      //   </header>
-      // </div>
-      <>
-        <h1>
-          this is KEYCLoak {message}
-        </h1>
-      </>
+      <div className="App">
+        <header className="App-header">
+          <h1>Welcome, {userInfo.username}</h1>
+          <p>User ID: {userInfo.UserId}</p>
+          <p>Email Verified: {userInfo.EmailVerified}</p>
+        </header>
+      </div>
   );
 };
 
