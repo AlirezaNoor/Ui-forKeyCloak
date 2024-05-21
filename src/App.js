@@ -33,7 +33,7 @@ const App = ({ keycloak }) => {
   return (
       <div className="App">
         <header className="App-header">
-          <h1>Welcome, {userInfo.username}</h1>
+          <h1>Welcome, {userInfo.username}{userInfo.name}</h1>
           <p>User ID: {userInfo.UserId}</p>
           <p>Email Verified: {userInfo.EmailVerified}</p>
         </header>
