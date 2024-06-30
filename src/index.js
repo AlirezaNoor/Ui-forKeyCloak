@@ -5,9 +5,9 @@ import App from './App';
 import './index.css';
 
 const keycloak = new Keycloak({
-    url: 'http://localhost:8080/auth',
+    url: 'http://localhost:8080',
     realm: 'master',
-    clientId: 'postman-client',
+    clientId: 'SH',
     // clientSecret: 'c43af123-d35c-4e89-9f4b-73274725ba37' // اضافه کردن Client Secret جدید اینجا
 });
 keycloak.init({
